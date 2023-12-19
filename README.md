@@ -39,7 +39,7 @@ If `--from` and `--to` are not specified, `ghatime` analyzes the last 7 days by 
 ### Example
 
 ```sh
-./ghatime -o myorg --from 2021-01-01 --to 2021-01-31
+./ghatime -o myorg --from 2023-01-01 --to 2023-01-31 >> output.json
 ```
 
 This command analyzes the execution time of GitHub Actions for all repositories in the `myorg` organization from January 1, 2021, to January 31, 2021.
