@@ -73,23 +73,16 @@ func analyzeExecutionTime(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
-	fmt.Printf("Date range: %s\n", dateRange)
-
-	fmt.Printf("Fetching repositories for %s\n", org)
-
 	repos, err := getRepositories(org, token)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "failed to fetch repositories:", err)
 		os.Exit(1)
 	}
 
-	fmt.Printf("Found %d repositories\n", len(repos))
-
 	eg, ctx := errgroup.WithContext(context.Background())
 	orgReposChan := make(chan Repository)
 
 	for _, repo := range repos {
-		fmt.Printf("Fetching workflow runs for %s\n", repo.Name)
 		repo := repo
 		eg.Go(func() error {
 			runs, err := getWorkflowRuns(ctx, org, repo.Name, token, dateRange)
@@ -132,7 +125,6 @@ func analyzeExecutionTime(cmd *cobra.Command, args []string) {
 				repo.Jobs = convertMapToSlice(jobs)
 				orgReposChan <- repo
 			}
-			fmt.Printf("Found %d workflow runs for %s\n", len(runs), repo.Name)
 			return nil
 		})
 	}
