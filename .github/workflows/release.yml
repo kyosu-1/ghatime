@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          # go.modから
+          go-version-file: ./go.mod
+
+      - name: Build binaries
+        run: |
+          GOOS=linux GOARCH=amd64 go build -o ghatime-linux-amd64
+          GOOS=windows GOARCH=amd64 go build -o ghatime-windows-amd64.exe
+          GOOS=darwin GOARCH=amd64 go build -o ghatime-darwin-amd64
+
+      - name: Upload releases
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ghatime-linux-amd64
+            ghatime-windows-amd64.exe
+            ghatime-darwin-amd64
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
