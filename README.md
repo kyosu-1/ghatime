@@ -62,10 +62,8 @@ The output is a JSON structure containing the organization name, a list of repos
                     "totalTime": 1800,
                     "avgTime": 300
                 },
-                // More jobs...
             ]
         },
-        // More repositories...
     ]
 }
 ```
