@@ -12,7 +12,7 @@
 
 You can download the latest binary from the Releases page:
 
-[https://github.com/your_username/ghatime/releases](https://github.com/your_username/ghatime/releases)
+[https://github.com/kyosu-1/ghatime/releases](https://github.com/kyosu-1/ghatime/releases)
 
 Choose the binary suitable for your platform (Windows, macOS, Linux), download it, and run it in your terminal.
 
